@@ -6,20 +6,20 @@ class User
   def initialize(username, ip, host)
     db_connection_string = ENV["DB"].to_s
     @firebase = Firebase::Client.new(db_connection_string)
-    if username.class == String && username.size > 0
-      @user = {
+    @user = {
           :username => username,
           :api_key => SecureRandom.uuid,
           :created_on => Time.now.getutc,
           :ip => ip,
           :host => host
-      }
-      p @user
-    end
+    }
+    binding.pry
+    p @user
   end
 
   def save
     response = @firebase.push('users', @user)
+    binding.pry
     p response
   end
 

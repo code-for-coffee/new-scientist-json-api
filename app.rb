@@ -8,9 +8,14 @@ def xml_feed_to_json(url)
   Crack::XML.parse(@xml).to_json
 end
 
-def log_access(resource, ip, host)
-  @log = Log.new(resource, ip, host)
-  p @log
+def log_access(api_key, resource, ip, host)
+  @log = Log.new(api_key, resource, ip, host)
+  if @log.is_api_key_valid == true
+    @log.save
+    true
+  else
+    false
+  end
 end
 
 ## root
@@ -22,52 +27,98 @@ end
 
 ## api key auth
 get '/register/:username' do
-  if !params[:username]
-    status 400
-    { :message => "no username parameter specified" }.to_json
-  else
-    @registered_user = User.new(params[:username], request.ip, request.host)
-    @registered_user.to_json
-  end
+  @registered_user = User.new(params[:username], request.ip, request.host)
+  @registered_user.save
+  @registered_user.to_json
 end
 
 ## api
 get '/api/v1' do
-  xml_feed_to_json('http://feeds.newscientist.com/')
+  is_authorized = log_access(params[:api_key], request.path, request.ip, request.host)
+  if is_authorized == true
+      xml_feed_to_json('http://feeds.newscientist.com/')
+  else
+    { :message => 'Invalid API key.' }.to_json
+  end
 end
 
 get '/api/v1/news' do
-  xml_feed_to_json('http://feeds.newscientist.com/science-news')
+  is_authorized = log_access(params[:api_key], request.path, request.ip, request.host)
+  if is_authorized == true
+      xml_feed_to_json('http://feeds.newscientist.com/science-news')
+  else
+    { :message => 'Invalid API key.' }.to_json
+  end
 end
 
 get '/api/v1/features' do
-  xml_feed_to_json('http://feeds.newscientist.com/features')
+  is_authorized = log_access(params[:api_key], request.path, request.ip, request.host)
+  if is_authorized == true
+      xml_feed_to_json('http://feeds.newscientist.com/features')
+  else
+    { :message => 'Invalid API key.' }.to_json
+  end
 end
 
 get '/api/v1/math-pyshics' do
-  xml_feed_to_json('http://feeds.newscientist.com/physics-math')
+  is_authorized = log_access(params[:api_key], request.path, request.ip, request.host)
+  if is_authorized == true
+      xml_feed_to_json('http://feeds.newscientist.com/physics-math')
+  else
+    { :message => 'Invalid API key.' }.to_json
+  end
 end
 
 get '/api/v1/tech' do
-  xml_feed_to_json('http://feeds.newscientist.com/tech')
+  is_authorized = log_access(params[:api_key], request.path, request.ip, request.host)
+  if is_authorized == true
+      xml_feed_to_json('http://feeds.newscientist.com/tech')
+  else
+    { :message => 'Invalid API key.' }.to_json
+  end
 end
 
 get '/api/v1/space' do
-  xml_feed_to_json('http://feeds.newscientist.com/space')
+  is_authorized = log_access(params[:api_key], request.path, request.ip, request.host)
+  if is_authorized == true
+      xml_feed_to_json('http://feeds.newscientist.com/space')
+  else
+    { :message => 'Invalid API key.' }.to_json
+  end
 end
 
 get '/api/v1/life' do
-  xml_feed_to_json('http://feeds.newscientist.com/life')
+  is_authorized = log_access(params[:api_key], request.path, request.ip, request.host)
+  if is_authorized == true
+      xml_feed_to_json('http://feeds.newscientist.com/life')
+  else
+    { :message => 'Invalid API key.' }.to_json
+  end
 end
 
 get '/api/v1/environment' do
-  xml_feed_to_json('http://feeds.newscientist.com/environment')
+  is_authorized = log_access(params[:api_key], request.path, request.ip, request.host)
+  if is_authorized == true
+      xml_feed_to_json('http://feeds.newscientist.com/environment')
+  else
+    { :message => 'Invalid API key.' }.to_json
+  end
 end
 
 get '/api/v1/health' do
-  xml_feed_to_json('http://feeds.newscientist.com/health')
+  is_authorized = log_access(params[:api_key], request.path, request.ip, request.host)
+  if is_authorized == true
+      xml_feed_to_json('http://feeds.newscientist.com/health')
+  else
+    { :message => 'Invalid API key.' }.to_json
+  end
 end
 
 get '/api/v1/humans' do
-  xml_feed_to_json('http://feeds.newscientist.com/humans')
+  is_authorized = log_access(params[:api_key], request.path, request.ip, request.host)
+  if is_authorized == true
+      xml_feed_to_json('http://feeds.newscientist.com/humans')
+  else
+    { :message => 'Invalid API key.' }.to_json
+  end
 end

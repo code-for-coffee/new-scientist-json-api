@@ -45,3 +45,8 @@ The current version of this api is v1. All resources may be requested at the roo
 - Ruby
 - Sinatra
 - Firebase
+
+
+## Logging Enabled
+
+Please note that all requests will have their IP and hostname logged.

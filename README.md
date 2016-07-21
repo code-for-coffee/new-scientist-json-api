@@ -1,5 +1,6 @@
-# new-scientist-json-api
-Simple JSON API wrapper for New Scientist's XML feeds.
+# Unofficial New Scientist JSON API
+
+Simple JSON API wrapper for New Scientist's XML feeds. _All content sourced directly from publically available news feeds; this data has not been changed or modified from the original content creator_. This API is for education purposes only.
 
 ## Requesting an API key
 

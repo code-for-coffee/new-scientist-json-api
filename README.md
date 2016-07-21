@@ -1,7 +1,27 @@
 # new-scientist-json-api
 Simple JSON API wrapper for New Scientist's XML feeds.
 
-## Endpoints
+## Requesting an API key
+
+* Send a GET request to: https://new-scientist-api.herokuapp.com/register/your_requested_username
+* A response will be provided to valid usernames with a response JSON of:
+
+```json
+{
+  "username":"who_you_are",
+  "api_key":"some_guid",
+  "created_on":"UTC timestamp",
+  "ip":"::1","host":"localhost"
+}
+```
+
+## Authentication
+
+All requested must contain the query string parameter of `?api_key=your_guid`.
+
+## Endpoints 
+
+The current version of this api is v1. All resources may be requested at the root of https://new-scientist-api.herokuapp.com/api/v1
 
 * `/` - All articles.
 * `/news` - News articles.
@@ -13,3 +33,8 @@ Simple JSON API wrapper for New Scientist's XML feeds.
 * `/environment` - Environmental Sciences
 * `/health` - Health Sciences
 * `/humans` - Anthro-related topics
+
+#### Example Usage
+
+* https://new-scientist-api.herokuapp.com/api/v1?api_key=your_key
+* https://new-scientist-api.herokuapp.com/api/v1/tech?api_key=your_key

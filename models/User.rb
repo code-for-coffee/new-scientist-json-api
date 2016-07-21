@@ -3,15 +3,16 @@ class User
   require 'securerandom'
   require 'json'
 
-  def initialize(username)
+  def initialize(username, ip, host)
     db_connection_string = ENV["DB"].to_s
-    binding.pry
     @firebase = Firebase::Client.new(db_connection_string)
     if username.class == String && username.size > 0
       @user = {
           :username => username,
           :api_key => SecureRandom.uuid,
-          :created_on => Firebase::ServerValue::TIMESTAMP
+          :created_on => Time.now.getutc,
+          :ip => ip,
+          :host => host
       }
       p @user
     end

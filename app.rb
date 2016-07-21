@@ -8,6 +8,11 @@ def xml_feed_to_json(url)
   Crack::XML.parse(@xml).to_json
 end
 
+def log_access(resource, ip, host)
+  @log = Log.new(resource, ip, host)
+  p @log
+end
+
 ## root
 
 get '/' do
@@ -21,7 +26,7 @@ get '/register/:username' do
     status 400
     { :message => "no username parameter specified" }.to_json
   else
-    @registered_user = User.new(params[:username])
+    @registered_user = User.new(params[:username], request.ip, request.host)
     @registered_user.to_json
   end
 end

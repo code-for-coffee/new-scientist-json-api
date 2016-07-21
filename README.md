@@ -39,3 +39,9 @@ The current version of this api is v1. All resources may be requested at the roo
 
 * https://new-scientist-api.herokuapp.com/api/v1?api_key=your_key
 * https://new-scientist-api.herokuapp.com/api/v1/tech?api_key=your_key
+
+## Technologies Used
+
+- Ruby
+- Sinatra
+- Firebase

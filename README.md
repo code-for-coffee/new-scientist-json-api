@@ -12,7 +12,8 @@ Simple JSON API wrapper for New Scientist's XML feeds. _All content sourced dire
   "username":"who_you_are",
   "api_key":"some_guid",
   "created_on":"UTC timestamp",
-  "ip":"::1","host":"localhost"
+  "ip":"::1",
+  "host":"localhost"
 }
 ```
 

@@ -1,0 +1,3 @@
+def Log
+
+end
